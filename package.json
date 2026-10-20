@@ -1,0 +1,29 @@
+{
+  "name": "teacher-session-booking-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REST API for booking teacher sessions, built with Node.js, TypeScript, Express, MongoDB and Mongoose.",
+  "type": "module",
+  "main": "dist/src/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/server.js",
+    "seed:teachers": "tsx scripts/seedTeachers.ts",
+    "seed:teachers:build": "node dist/scripts/seedTeachers.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.30",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
