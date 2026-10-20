@@ -45,13 +45,15 @@ export const createUser = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const getUserSessions = asyncHandler(async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const idParam = req.params.id;
+    const id = typeof idParam === "string" ? idParam : undefined;
 
     if (!id || !mongoose.isObjectIdOrHexString(id)) {
-        throw new ApiError(400, "Invalid user ID");
+      throw new ApiError(400, "Invalid user ID");
     }
 
     const userObjectId = new mongoose.Types.ObjectId(id);
+    
     const userExists = await User.exists({ _id: userObjectId });
 
     if (!userExists) {

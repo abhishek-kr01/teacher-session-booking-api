@@ -123,7 +123,13 @@ export const getAvailableSessions = asyncHandler(async (req: Request, res: Respo
 });
 
 export const bookSession = asyncHandler(async (req: Request, res: Response) => {
-    const sessionId = validateObjectId(req.params.id, "session ID");
+    const sessionIdParam = req.params.id;
+
+    const sessionId = validateObjectId(
+      typeof sessionIdParam === "string" ? sessionIdParam : undefined,
+      "session ID",
+    );
+
     const { userId } = (req.body ?? {}) as BookSessionBody;
 
     if (typeof userId !== "string") {
@@ -170,7 +176,12 @@ export const bookSession = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const completeSession = asyncHandler(async (req: Request, res: Response) => {
-    const sessionId = validateObjectId(req.params.id, "session ID");
+    const sessionIdParam = req.params.id;
+
+    const sessionId = validateObjectId(
+      typeof sessionIdParam === "string" ? sessionIdParam : undefined,
+      "session ID",
+    );
 
     // The status filter prevents transitions from AVAILABLE or COMPLETED.
     const session = await Session.findOneAndUpdate(
